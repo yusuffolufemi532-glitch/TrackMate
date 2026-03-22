@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { CheckCircle2, Circle, Menu, Trophy } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, Circle, Menu, Trophy } from 'lucide-react';
 import { ProgressBar } from './ProgressBar';
 import { LessonDetail } from './LessonDetail';
 
 interface DashboardProps {
   track: string;
   level: string;
+  onBack: () => void;
 }
 
 interface Task {
@@ -139,7 +140,7 @@ const mockRoadmap: Record<string, Week[]> = {
   ],
 };
 
-export function Dashboard({ track, level }: DashboardProps) {
+export function Dashboard({ track, level, onBack }: DashboardProps) {
   const [roadmap, setRoadmap] = useState<Week[]>(mockRoadmap[track] || mockRoadmap.web);
   const [selectedLesson, setSelectedLesson] = useState<{
     id: string;
@@ -199,6 +200,13 @@ export function Dashboard({ track, level }: DashboardProps) {
     <div className="min-h-screen bg-slate-50">
       <header className="bg-white border-b border-slate-200 sticky top-0 z-10">
         <div className="max-w-2xl mx-auto px-4 py-4">
+          <button
+            onClick={onBack}
+            className="flex items-center gap-2 text-slate-600 hover:text-slate-900 font-medium mb-3 transition-colors"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            Back
+          </button>
           <div className="flex items-center justify-between mb-4">
             <div>
               <h1 className="text-xl font-bold text-slate-900">TrackMate</h1>

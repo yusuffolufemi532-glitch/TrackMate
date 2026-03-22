@@ -18,8 +18,12 @@ function App() {
     setScreen('dashboard');
   };
 
-  const handleBack = () => {
+  const handleBackToOnboarding = () => {
     setScreen('onboarding');
+  };
+
+  const handleBackToTrackSelection = () => {
+    setScreen('track-selection');
   };
 
   if (screen === 'onboarding') {
@@ -27,10 +31,10 @@ function App() {
   }
 
   if (screen === 'track-selection') {
-    return <TrackSelection track={userTrack} onConfirm={handleTrackConfirmed} onBack={handleBack} />;
+    return <TrackSelection track={userTrack} onConfirm={handleTrackConfirmed} onBack={handleBackToOnboarding} />;
   }
 
-  return <Dashboard track={userTrack} level={userLevel} />;
+  return <Dashboard track={userTrack} level={userLevel} onBack={handleBackToTrackSelection} />;
 }
 
 export default App;
