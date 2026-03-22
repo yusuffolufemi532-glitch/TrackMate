@@ -23,11 +23,13 @@ TrackMate guides learners within their selected track by:
 
 ---
 
-## 🎯 Features (MVP)
-- Track Selection  
-- Learning Roadmap  
-- “I don’t understand” feature  
-- Catch-up system  
+## 🎯 Target Audience
+- 3MTT fellows  
+- coding bootcamp students  
+- beginners in tech  
+- professional learners (e.g. ICAN)  
+- exam-focused learners (e.g. JAMB)  
+- training institutes and fellowship programs
 
 ---
 
@@ -41,17 +43,22 @@ TrackMate guides learners within their selected track by:
 
 ---
 
-## 🛠️ Tech Stack
-- Bolt.new  
-- Frontend only  
-- Mock data  
+🚀 Future Improvements
+Mobile PWA support (installable app with offline access)
+Local language support for better accessibility
+Voice interaction (speak and receive responses)
+Smart onboarding based on user level (beginner/intermediate/advanced)
+Learning reminders (optional, user-controlled)
+Screenshot-based guidance to assist learners visually
+Real-time lesson updates from training institutions
 
 ---
 
-## 🚀 Future Improvements
-- Real AI integration  
-- Personalized learning  
-- Institution-based onboarding  
+
+## 🛠️ Tech Stack
+- Bolt.new  
+- Frontend only  
+- Mock data 
 
 ---
 
