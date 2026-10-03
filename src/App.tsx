@@ -1,40 +1,61 @@
 import { useState } from 'react';
+import { Welcome } from './components/Welcome';
 import { Onboarding } from './components/Onboarding';
-import { TrackSelection } from './components/TrackSelection';
-import { Dashboard } from './components/Dashboard';
+import { PathResult } from './components/PathResult';
+import { Explore } from './components/Explore';
+import type { OnboardingSelections } from './data/pathData';
+
+type Screen = 'welcome' | 'onboarding' | 'result' | 'explore';
 
 function App() {
-  const [screen, setScreen] = useState<'onboarding' | 'track-selection' | 'dashboard'>('onboarding');
-  const [userTrack, setUserTrack] = useState('');
-  const [userLevel, setUserLevel] = useState('');
+  const [screen, setScreen] = useState<Screen>('welcome');
+  const [selections, setSelections] = useState<OnboardingSelections | null>(null);
 
-  const handleTrackSelected = (track: string) => {
-    setUserTrack(track);
-    setScreen('track-selection');
+  const handleStart = () => setScreen('onboarding');
+
+  const handleOnboardingComplete = (s: OnboardingSelections) => {
+    setSelections(s);
+    setScreen('result');
   };
 
-  const handleTrackConfirmed = (level: string) => {
-    setUserLevel(level);
-    setScreen('dashboard');
+  const handleRestart = () => {
+    setSelections(null);
+    setScreen('welcome');
   };
 
-  const handleBackToOnboarding = () => {
-    setScreen('onboarding');
-  };
+  const handleExplore = () => setScreen('explore');
 
-  const handleBackToTrackSelection = () => {
-    setScreen('track-selection');
-  };
+  const handleBackToResult = () => setScreen('result');
+
+  if (screen === 'welcome') {
+    return <Welcome onStart={handleStart} />;
+  }
 
   if (screen === 'onboarding') {
-    return <Onboarding onTrackSelected={handleTrackSelected} />;
+    return <Onboarding onComplete={handleOnboardingComplete} onBack={() => setScreen('welcome')} />;
   }
 
-  if (screen === 'track-selection') {
-    return <TrackSelection track={userTrack} onConfirm={handleTrackConfirmed} onBack={handleBackToOnboarding} />;
+  if (screen === 'result' && selections) {
+    return (
+      <PathResult
+        selections={selections}
+        onRestart={handleRestart}
+        onExplore={handleExplore}
+      />
+    );
   }
 
-  return <Dashboard track={userTrack} level={userLevel} onBack={handleBackToTrackSelection} />;
+  if (screen === 'explore' && selections) {
+    return (
+      <Explore
+        selections={selections}
+        onBack={handleBackToResult}
+        onRestart={handleRestart}
+      />
+    );
+  }
+
+  return <Welcome onStart={handleStart} />;
 }
 
 export default App;
